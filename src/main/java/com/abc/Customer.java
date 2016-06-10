@@ -45,6 +45,18 @@ public class Customer {
         statement += "\nTotal In All Accounts " + toDollars(total);
         return statement;
     }
+    
+    public void transferFunds(Account fromAccount, Account toAccount, double amount) {
+    	if (amount <= 0) {
+    		throw new IllegalArgumentException("amount must be greater than zero");
+    	} else {
+    		// Avoid race condition
+    		synchronized(this) {
+    			fromAccount.withdraw(amount);
+    			toAccount.deposit(amount);
+    		}
+    	}
+    }
 
     private String statementForAccount(Account a) {
         String s = "";
