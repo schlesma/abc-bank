@@ -8,13 +8,6 @@ public class AccountTest {
 	private static final double DOUBLE_DELTA = 1e-15;
 	
 	@Test
-	public void testCalculate() {	
-        Account checkingAccount = new Account(Account.CHECKING);
-        double accrual = checkingAccount.calculate(10000, 0.001);
-        assertEquals(accrual, 10010.00499, DOUBLE_DELTA);       
-	}
-
-	@Test
 	public void testInterestEarned() {
         Account checkingAccount = new Account(Account.CHECKING);
         checkingAccount.deposit(100.0);
@@ -22,7 +15,7 @@ public class AccountTest {
         checkingAccount.deposit(50.0);
         checkingAccount.withdraw(75.0);
         double interest = checkingAccount.interestEarned();
-        assertEquals(interest, 0.1750873, DOUBLE_DELTA);       
+        assertEquals(interest, 0.275, DOUBLE_DELTA);       
 	}
 	
 	@Test
@@ -35,10 +28,10 @@ public class AccountTest {
 	
 	@Test
 	public void testMaxiSavingsAccounts() {
-        Account checkingAccount = new Account(Account.CHECKING);
+        Account checkingAccount = new Account(Account.MAXI_SAVINGS);
         checkingAccount.deposit(100);
         double intEarned = checkingAccount.interestEarned();
-        assertEquals(intEarned, 0.1000499, DOUBLE_DELTA); 
+        assertEquals(intEarned, 5.0, DOUBLE_DELTA); 
 	}
 	
 
