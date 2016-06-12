@@ -34,20 +34,15 @@ public class Account {
     	}
     }
     
-    public double calculate(double p, double r) {
-    	return p * Math.pow(1 + (r / 365), 365);
-    }
-
 
     public double interestEarned() {
         double amount = sumTransactions();
         switch(accountType){
             case SAVINGS:
-                if (amount <= 1000) 
-                    //return amount * 0.001;
-                	return calculate(amount, 0.001);
+                if (amount <= 1000)
+                    return amount * 0.001;
                 else
-                    return calculate((1 + (amount-1000.0)), 0.002);
+                    return 1 + (amount-1000) * 0.002;
 //            case SUPER_SAVINGS:
 //                if (amount <= 4000)
 //                    return 20;
@@ -57,13 +52,13 @@ public class Account {
              */
             case MAXI_SAVINGS:
             	if (!withdrawalsInPast10Days()){
-            		return calculate(amount, 0.05);
+            		return amount * 0.05;
             	} else {
-            		return calculate(amount, 0.001);
+            		return amount * 0.001;
             	}
 
             default:
-                return calculate(amount, 0.001);
+            	return amount * 0.001;
         }
     }
 
